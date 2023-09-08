@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,10 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               const Text(
                   "If you are editing this text field, the keyboard will not be dismissed when you tap outside of it. "
-                  "Not even if you tap on the checkbox."),
+                  "Not even if you tap on the checkbox. And if the keyboard has a keyboardType like TextInputType.number, "
+                  "it is even harder to dismiss the keyboard as there is no extra button."),
               const Divider(),
               FormBuilderTextField(
                   name: "exampleTextField",
+                  keyboardType: TextInputType.number,
                   decoration:
                       const InputDecoration(labelText: "Example Text Field")),
               FormBuilderCheckbox(
