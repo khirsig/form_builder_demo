@@ -20,8 +20,10 @@ class _FormBodyState extends State<FormBody> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const TextField(
-                  decoration: InputDecoration(labelText: "Example Text Field")),
+              TextFormField(
+                decoration:
+                    const InputDecoration(labelText: "Example Text Field"),
+              ),
               Checkbox(
                 value: _isChecked,
                 onChanged: (bool? value) {
