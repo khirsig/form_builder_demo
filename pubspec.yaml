@@ -39,6 +39,10 @@ dependencies:
     git:
       url: https://github.com/khirsig/flutter_form_builder
       ref: clearButton
+  form_builder_extra_fields:
+    git:
+      url: https://github.com/khirsig/form_builder_extra_fields
+      ref: dependencies
 
 dev_dependencies:
   flutter_test:
