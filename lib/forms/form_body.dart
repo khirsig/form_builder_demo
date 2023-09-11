@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_builder_demo/custom/checkbox_form.dart';
 
 class FormBody extends StatefulWidget {
   const FormBody({super.key});
@@ -32,6 +33,7 @@ class _FormBodyState extends State<FormBody> {
                   });
                 },
               ),
+              CheckboxForm(),
             ],
           ),
         ),
