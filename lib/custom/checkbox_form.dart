@@ -49,11 +49,20 @@ class _CheckboxFormState extends FormFieldState<bool> {
   CheckboxForm get widget => super.widget as CheckboxForm;
 
   late FocusNode effectiveFocusNode;
+  FocusAttachment? focusAttachment;
 
   @override
   void initState() {
     super.initState();
     effectiveFocusNode = widget.focusNode ?? FocusNode();
+    focusAttachment = effectiveFocusNode.attach(context);
+  }
+
+  @override
+  void dispose() {
+    focusAttachment!.detach();
+    effectiveFocusNode.dispose();
+    super.dispose();
   }
 
   void focus() {
