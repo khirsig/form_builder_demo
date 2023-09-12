@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_demo/forms/form_body.dart';
+import 'package:form_builder_demo/forms/real_form_builder.dart';
 
 import 'forms/form_builder_body.dart';
 
@@ -38,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _getBody() {
     switch (_currentTab) {
       case 0:
+        return RealFormBuilderDemo();
+      case 1:
         return const FormBuilderBody();
       default:
         return const FormBody();
@@ -64,6 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: "RealFormBuilder",
+            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
               label: "FormBuilder",

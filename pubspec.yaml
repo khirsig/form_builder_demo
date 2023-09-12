@@ -43,6 +43,7 @@ dependencies:
     git:
       url: https://github.com/khirsig/form_builder_extra_fields
       ref: dependencies
+  form_builder_validators: ^9.0.0
 
 dev_dependencies:
   flutter_test:
