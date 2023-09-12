@@ -54,7 +54,8 @@ class _CheckboxFormState extends FormFieldState<bool> {
   @override
   void initState() {
     super.initState();
-    effectiveFocusNode = widget.focusNode ?? FocusNode();
+    effectiveFocusNode =
+        widget.focusNode ?? FocusNode(debugLabel: 'CheckboxForm');
     focusAttachment = effectiveFocusNode.attach(context);
   }
 
@@ -67,7 +68,7 @@ class _CheckboxFormState extends FormFieldState<bool> {
 
   void focus() {
     if (!effectiveFocusNode.hasFocus) {
-      FocusScope.of(context).requestFocus(effectiveFocusNode);
+      effectiveFocusNode.requestFocus();
     }
   }
 }
