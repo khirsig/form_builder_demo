@@ -114,8 +114,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: clearButton
-      resolved-ref: b0d8866777296e3771850a8769be95a552df4cf5
+      ref: modified-main
+      resolved-ref: "88d7e638fd41a52de8fee591d71f5424cbe20312"
       url: "https://github.com/khirsig/flutter_form_builder"
     source: git
     version: "9.1.0"
@@ -214,7 +214,7 @@ packages:
     description:
       path: "."
       ref: dependencies
-      resolved-ref: "9e50e2302e577a0f8e695d842e45dc4023fe9b89"
+      resolved-ref: c3a7345ebd527c4e31a5611d81354e0fead6cc4d
       url: "https://github.com/khirsig/form_builder_extra_fields"
     source: git
     version: "10.0.0"

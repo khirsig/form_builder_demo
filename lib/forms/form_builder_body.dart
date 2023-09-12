@@ -48,7 +48,10 @@ class _FormBuilderBodyState extends State<FormBuilderBody> {
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(const Duration(days: 7))),
                 FormBuilderDateTimePicker(
-                    name: "dateTimePicker", initialTime: TimeOfDay.now()),
+                  name: "dateTimePicker",
+                  initialTime: TimeOfDay.now(),
+                  resetIcon: const Icon(Icons.restore),
+                ),
                 FormBuilderChoiceChip(name: "choiceChip", options: const [
                   FormBuilderChipOption(
                       value: "item1", avatar: Icon(Icons.access_alarm)),
