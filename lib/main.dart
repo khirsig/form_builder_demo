@@ -5,6 +5,8 @@ import 'package:form_builder_demo/forms/real_form_builder.dart';
 import 'forms/form_builder_body.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -59,27 +61,29 @@ class _MyHomePageState extends State<MyHomePage> {
               FocusScope.of(context).requestFocus(FocusNode());
             },
             child: _getBody()),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentTab,
-          onTap: (int index) {
-            setState(() {
-              _currentTab = index;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: "RealFormBuilder",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: "FormBuilder",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: "Form",
-            ),
-          ],
+        bottomNavigationBar: FocusScope(
+          child: BottomNavigationBar(
+            currentIndex: _currentTab,
+            onTap: (int index) {
+              setState(() {
+                _currentTab = index;
+              });
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: "RealFormBuilder",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: "FormBuilder",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: "Form",
+              ),
+            ],
+          ),
         ));
   }
 }

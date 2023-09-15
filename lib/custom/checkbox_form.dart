@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class CheckboxForm extends FormField<bool> {
   final FocusNode? focusNode;
-
   CheckboxForm({
     super.key,
     super.initialValue,
@@ -34,7 +33,7 @@ class CheckboxForm extends FormField<bool> {
                 value: tristate ? state.value : (state.value ?? false),
                 onChanged: onChangedHandler,
                 tristate: tristate,
-                focusNode: focusNode,
+                focusNode: state.effectiveFocusNode,
               ),
             );
           },

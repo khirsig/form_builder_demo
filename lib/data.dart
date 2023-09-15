@@ -22,3 +22,5 @@ List<DropdownMenuItem> dropdownItems = const [
 ];
 
 List<String> stringItems = const ['item1', 'item2', 'item3'];
+
+List<String> countries = const ['Germany', 'USA', 'South Korea', 'Canada'];

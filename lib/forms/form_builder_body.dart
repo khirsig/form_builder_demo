@@ -44,9 +44,10 @@ class _FormBuilderBodyState extends State<FormBuilderBody> {
                   items: dropdownItems,
                 ),
                 FormBuilderDateRangePicker(
-                    name: "dateRangePicker",
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(const Duration(days: 7))),
+                  name: "dateRangePicker",
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now().add(const Duration(days: 7)),
+                ),
                 FormBuilderDateTimePicker(
                   name: "dateTimePicker",
                   initialTime: TimeOfDay.now(),

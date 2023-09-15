@@ -33,7 +33,9 @@ class _FormBodyState extends State<FormBody> {
                   });
                 },
               ),
-              CheckboxForm(),
+              CheckboxForm(
+                  decoration:
+                      const InputDecoration(labelText: "Checkbox Form")),
             ],
           ),
         ),
