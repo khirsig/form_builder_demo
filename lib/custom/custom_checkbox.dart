@@ -119,6 +119,7 @@ class FormBuilderCheckbox extends FormBuilderFieldDecoration<bool> {
 
             return InputDecorator(
               decoration: state.decoration,
+              isFocused: state.effectiveFocusNode.hasFocus,
               child: CheckboxListTile(
                 dense: true,
                 isThreeLine: false,
@@ -153,6 +154,22 @@ class FormBuilderCheckbox extends FormBuilderFieldDecoration<bool> {
 
 class _FormBuilderCheckboxState
     extends FormBuilderFieldDecorationState<FormBuilderCheckbox, bool> {
+  void handleFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    effectiveFocusNode.addListener(handleFocusChange);
+  }
+
+  @override
+  void dispose() {
+    effectiveFocusNode.removeListener(handleFocusChange);
+    super.dispose();
+  }
+
   @override
   void didChange(bool? value) {
     focus();

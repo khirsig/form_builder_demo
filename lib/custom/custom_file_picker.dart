@@ -107,29 +107,32 @@ class FormBuilderFilePicker
           builder: (FormFieldState<List<PlatformFile>?> field) {
             final state = field as _FormBuilderFilePickerState;
 
-            return InputDecorator(
-              decoration: state.decoration.copyWith(
-                  counterText: maxFiles != null
-                      ? '${state._files.length} / $maxFiles'
-                      : null),
-              // isFocused: state.effectiveFocusNode.hasFocus,
-              child: Column(
-                children: <Widget>[
-                  customTypeViewerBuilder != null
-                      ? customTypeViewerBuilder(
-                          state.getTypeSelectorActions(typeSelectors, field))
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: state.getTypeSelectorActions(
-                              typeSelectors, field),
-                        ),
-                  const SizedBox(height: 3),
-                  customFileViewerBuilder != null
-                      ? customFileViewerBuilder.call(state._files,
-                          (files) => state._setFiles(files ?? [], field))
-                      : state.defaultFileViewer(state._files,
-                          (files) => state._setFiles(files ?? [], field)),
-                ],
+            return Focus(
+              focusNode: state.effectiveFocusNode,
+              child: InputDecorator(
+                decoration: state.decoration.copyWith(
+                    counterText: maxFiles != null
+                        ? '${state._files.length} / $maxFiles'
+                        : null),
+                isFocused: state.effectiveFocusNode.hasFocus,
+                child: Column(
+                  children: <Widget>[
+                    customTypeViewerBuilder != null
+                        ? customTypeViewerBuilder(
+                            state.getTypeSelectorActions(typeSelectors, field))
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: state.getTypeSelectorActions(
+                                typeSelectors, field),
+                          ),
+                    const SizedBox(height: 3),
+                    customFileViewerBuilder != null
+                        ? customFileViewerBuilder.call(state._files,
+                            (files) => state._setFiles(files ?? [], field))
+                        : state.defaultFileViewer(state._files,
+                            (files) => state._setFiles(files ?? [], field)),
+                  ],
+                ),
               ),
             );
           },
@@ -166,22 +169,22 @@ class _FormBuilderFilePickerState extends FormBuilderFieldDecorationState<
   int? get _remainingItemCount =>
       widget.maxFiles == null ? null : widget.maxFiles! - _files.length;
 
-  // void handleFocusChange() {
-  //   setState(() {});
-  // }
+  void handleFocusChange() {
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
     _files = initialValue ?? [];
-    // effectiveFocusNode.addListener(handleFocusChange);
+    effectiveFocusNode.addListener(handleFocusChange);
   }
 
-  // @override
-  // void dispose() {
-  //   effectiveFocusNode.removeListener(handleFocusChange);
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    effectiveFocusNode.removeListener(handleFocusChange);
+    super.dispose();
+  }
 
   Future<void> pickFiles(
       FormFieldState<List<PlatformFile>?> field, FileType fileType) async {
@@ -285,6 +288,7 @@ class _FormBuilderFilePickerState extends FormBuilderFieldDecorationState<
                         right: 0,
                         child: InkWell(
                           onTap: () {
+                            focus();
                             files.removeAt(index);
                             setter.call([...files]);
                           },
@@ -322,7 +326,10 @@ class _FormBuilderFilePickerState extends FormBuilderFieldDecorationState<
         (typeSelector) => InkWell(
           onTap: enabled &&
                   (null == _remainingItemCount || _remainingItemCount! > 0)
-              ? () => pickFiles(field, typeSelector.type)
+              ? () {
+                  focus();
+                  pickFiles(field, typeSelector.type);
+                }
               : null,
           child: typeSelector.selector,
         ),

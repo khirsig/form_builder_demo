@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart'
     hide
@@ -8,15 +9,16 @@ import 'package:flutter_form_builder/flutter_form_builder.dart'
         FormBuilderCheckbox,
         FormBuilderChoiceChip,
         FormBuilderDateRangePicker;
+import 'package:form_builder_demo/custom/custom_autocomplete.dart';
 import 'package:form_builder_demo/custom/custom_checkbox.dart';
 import 'package:form_builder_demo/custom/custom_choice_chip.dart';
 import 'package:form_builder_demo/custom/custom_date_range_picker.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
-// import 'package:form_builder_demo/custom/custom_file_picker.dart';
+import 'package:form_builder_demo/custom/custom_file_picker.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
 import 'package:form_builder_demo/data.dart';
-import 'package:form_builder_file_picker/form_builder_file_picker.dart';
+// import 'package:form_builder_file_picker/form_builder_file_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 abstract class InitialValue {
@@ -202,6 +204,20 @@ class RealFormBuilderDemo extends StatelessWidget {
                       } else {
                         return countries;
                       }
+                    },
+                  ),
+                  FormBuilderAutocomplete(
+                    name: "autocomplete",
+                    decoration: InputDecoration(labelText: "Autocomplete"),
+                    optionsBuilder: (TextEditingValue textEditingValue) {
+                      if (textEditingValue.text == '') {
+                        return const Iterable<String>.empty();
+                      }
+                      return countries.where((String option) {
+                        return option
+                            .toLowerCase()
+                            .contains(textEditingValue.text.toLowerCase());
+                      });
                     },
                   ),
                   ButtonBar(
