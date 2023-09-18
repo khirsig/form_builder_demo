@@ -5,8 +5,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart'
     hide FormBuilderDateTimePicker, FormBuilderTextField;
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
+import 'package:form_builder_demo/custom/custom_typeahead.dart';
 import 'package:form_builder_demo/data.dart';
-import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+// import 'package:form_builder_extra_fields/form_builder_extra_fields.dart'
+//     hide FormBuilderTypeAhead;
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 abstract class InitialValue {
@@ -151,19 +153,31 @@ class RealFormBuilderDemo extends StatelessWidget {
                           value: "iPad", avatar: Icon(Icons.tablet)),
                     ],
                   ),
-                  FormBuilderSearchableDropdown<String>(
-                    name: "country",
-                    autoValidateMode: AutovalidateMode.always,
-                    popupProps: const PopupProps.menu(showSearchBox: true),
-                    dropdownSearchDecoration: const InputDecoration(
-                      hintText: 'Search',
-                      labelText: 'Search',
+                  FormBuilderTypeAhead<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'Your Country',
                     ),
-                    items: countries,
-                    decoration:
-                        const InputDecoration(labelText: 'Your Country'),
-                    filterFn: (item, filter) =>
-                        item.toLowerCase().contains(filter.toLowerCase()),
+                    name: 'country',
+                    allowOnlyValuesFromSelectlist: true,
+                    itemBuilder: (context, country) {
+                      return ListTile(title: Text(country));
+                    },
+                    controller: TextEditingController(text: ''),
+                    suggestionsCallback: (query) {
+                      if (query.isNotEmpty) {
+                        var lowercaseQuery = query.toLowerCase();
+                        return countries.where((country) {
+                          return country.toLowerCase().contains(lowercaseQuery);
+                        }).toList(growable: false)
+                          ..sort((a, b) => a
+                              .toLowerCase()
+                              .indexOf(lowercaseQuery)
+                              .compareTo(
+                                  b.toLowerCase().indexOf(lowercaseQuery)));
+                      } else {
+                        return countries;
+                      }
+                    },
                   ),
                   ButtonBar(
                     children: [
