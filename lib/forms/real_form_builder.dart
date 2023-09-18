@@ -2,13 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart'
-    hide FormBuilderDateTimePicker, FormBuilderTextField;
+    hide FormBuilderDateTimePicker, FormBuilderTextField, FormBuilderCheckbox;
+import 'package:form_builder_demo/custom/custom_checkbox.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
 import 'package:form_builder_demo/data.dart';
-// import 'package:form_builder_extra_fields/form_builder_extra_fields.dart'
-//     hide FormBuilderTypeAhead;
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 abstract class InitialValue {
@@ -137,13 +136,12 @@ class RealFormBuilderDemo extends StatelessWidget {
                     validator: FormBuilderValidators.required(),
                   ),
                   FormBuilderDateTimePicker(
-                      enabled: false,
                       name: "birthday",
                       decoration:
-                          InputDecoration(labelText: "Your Date of Birth")),
+                          InputDecoration(labelText: "Your date of birth")),
                   FormBuilderChoiceChip(
                     name: "userDevice",
-                    decoration: InputDecoration(labelText: "Your Device"),
+                    decoration: InputDecoration(labelText: "Your device"),
                     options: const [
                       FormBuilderChipOption(
                           value: "iPhone", avatar: Icon(Icons.apple)),
@@ -155,7 +153,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                   ),
                   FormBuilderTypeAhead<String>(
                     decoration: const InputDecoration(
-                      labelText: 'Your Country',
+                      labelText: 'Your country',
                     ),
                     name: 'country',
                     allowOnlyValuesFromSelectlist: true,
@@ -209,9 +207,39 @@ class RealFormBuilderDemo extends StatelessWidget {
                     children: [
                       TextButton(
                         onPressed: () {
+                          state.fields["firstName"]!.focus();
+                        },
+                        child: Text("Focus 'First name'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["lastName"]!.focus();
+                        },
+                        child: Text("Focus 'Last name'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["terms"]!.focus();
+                        },
+                        child: Text("Focus 'Terms accepted'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
                           state.fields["birthday"]!.focus();
                         },
-                        child: Text("Focus 'Your Date of Birth'"),
+                        child: Text("Focus 'Your date of birth'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["userDevice"]!.focus();
+                        },
+                        child: Text("Focus 'User device'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["country"]!.focus();
+                        },
+                        child: Text("Focus 'Your country'"),
                       ),
                     ],
                   )
