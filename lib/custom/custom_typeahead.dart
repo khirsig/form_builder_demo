@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart'
+    hide ClearButton;
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:form_builder_demo/custom/clear_button.dart';
 
@@ -323,7 +324,7 @@ class FormBuilderTypeAhead<T> extends FormBuilderFieldDecoration<T> {
                 focusNode: state.effectiveFocusNode,
                 decoration: state.isNotEmpty()
                     ? state.decoration.copyWith(
-                        suffixIcon: TypeAheadClearButton<T>(
+                        suffixIcon: ClearButton<T>(
                         fieldState: state,
                       ))
                     : state.decoration,
