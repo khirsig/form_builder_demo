@@ -12,9 +12,11 @@ import 'package:form_builder_demo/custom/custom_checkbox.dart';
 import 'package:form_builder_demo/custom/custom_choice_chip.dart';
 import 'package:form_builder_demo/custom/custom_date_range_picker.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
+// import 'package:form_builder_demo/custom/custom_file_picker.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
 import 'package:form_builder_demo/data.dart';
+import 'package:form_builder_file_picker/form_builder_file_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 abstract class InitialValue {
@@ -136,6 +138,14 @@ class RealFormBuilderDemo extends StatelessWidget {
                   FormBuilderTextField(
                     name: "lastName",
                     decoration: InputDecoration(labelText: "Last name"),
+                  ),
+                  FormBuilderFilePicker(
+                    name: "image",
+                    decoration: InputDecoration(labelText: "Avatar"),
+                    typeSelectors: const [
+                      TypeSelector(
+                          type: FileType.image, selector: Icon(Icons.image)),
+                    ],
                   ),
                   FormBuilderCheckbox(
                     name: "terms",

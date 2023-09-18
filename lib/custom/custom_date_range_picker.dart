@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:form_builder_demo/custom/clear_button.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'package:flutter_form_builder/flutter_form_builder.dart'
-    hide ClearButton;
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 /// Field for selecting a range of dates
 class FormBuilderDateRangePicker

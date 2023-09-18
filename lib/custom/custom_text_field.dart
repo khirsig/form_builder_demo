@@ -3,7 +3,7 @@ import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart' hide ClearButton;
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_demo/custom/clear_button.dart';
 
 /// A Material Design text field input.
