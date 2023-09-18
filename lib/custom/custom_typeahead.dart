@@ -274,7 +274,7 @@ class FormBuilderTypeAhead<T> extends FormBuilderFieldDecoration<T> {
     super.validator,
     super.decoration,
     super.initialValue,
-    this.allowOnlyValuesFromSelectlist = false,
+    this.allowOnlyValuesFromSelectlist = true,
     super.onChanged,
     super.valueTransformer,
     super.onReset,
@@ -376,7 +376,7 @@ class FormBuilderTypeAheadState<T>
     super.initState();
     _typeAheadController = widget.controller ??
         TextEditingController(text: _getTextString(initialValue));
-    if (!widget.allowOnlyValuesFromSelectlist) {
+    if (widget.allowOnlyValuesFromSelectlist) {
       _typeAheadController.addListener(_handleControllerChanged);
     }
   }

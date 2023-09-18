@@ -161,7 +161,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                       labelText: 'Your country',
                     ),
                     name: 'country',
-                    allowOnlyValuesFromSelectlist: true,
+                    allowOnlyValuesFromSelectlist: false,
                     itemBuilder: (context, country) {
                       return ListTile(title: Text(country));
                     },
@@ -203,6 +203,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                             );
                           }
                         },
+
                         child: Text("Save"),
                       )
                     ],
