@@ -293,45 +293,49 @@ class FormBuilderChoiceChip<T> extends FormBuilderFieldDecoration<T> {
   }) : super(builder: (FormFieldState<T?> field) {
           final state = field as _FormBuilderChoiceChipState<T>;
 
-          return InputDecorator(
-            decoration: state.decoration,
-            child: Wrap(
-              direction: direction,
-              alignment: alignment,
-              crossAxisAlignment: crossAxisAlignment,
-              runAlignment: runAlignment,
-              runSpacing: runSpacing,
-              spacing: spacing,
-              textDirection: textDirection,
-              verticalDirection: verticalDirection,
-              children: <Widget>[
-                for (FormBuilderChipOption<T> option in options)
-                  ChoiceChip(
-                    label: option,
-                    shape: shape,
-                    selected: field.value == option.value,
-                    onSelected: state.enabled
-                        ? (selected) {
-                            final choice = selected ? option.value : null;
-                            state.didChange(choice);
-                          }
-                        : null,
-                    avatar: option.avatar,
-                    selectedColor: selectedColor,
-                    disabledColor: disabledColor,
-                    backgroundColor: backgroundColor,
-                    shadowColor: shadowColor,
-                    selectedShadowColor: selectedShadowColor,
-                    elevation: elevation,
-                    pressElevation: pressElevation,
-                    materialTapTargetSize: materialTapTargetSize,
-                    labelStyle: labelStyle,
-                    labelPadding: labelPadding,
-                    padding: padding,
-                    visualDensity: visualDensity,
-                    avatarBorder: avatarBorder,
-                  ),
-              ],
+          return Focus(
+            focusNode: state.effectiveFocusNode,
+            child: InputDecorator(
+              decoration: state.decoration,
+              isFocused: state.effectiveFocusNode.hasFocus,
+              child: Wrap(
+                direction: direction,
+                alignment: alignment,
+                crossAxisAlignment: crossAxisAlignment,
+                runAlignment: runAlignment,
+                runSpacing: runSpacing,
+                spacing: spacing,
+                textDirection: textDirection,
+                verticalDirection: verticalDirection,
+                children: <Widget>[
+                  for (FormBuilderChipOption<T> option in options)
+                    ChoiceChip(
+                      label: option,
+                      shape: shape,
+                      selected: field.value == option.value,
+                      onSelected: state.enabled
+                          ? (selected) {
+                              final choice = selected ? option.value : null;
+                              state.didChange(choice);
+                            }
+                          : null,
+                      avatar: option.avatar,
+                      selectedColor: selectedColor,
+                      disabledColor: disabledColor,
+                      backgroundColor: backgroundColor,
+                      shadowColor: shadowColor,
+                      selectedShadowColor: selectedShadowColor,
+                      elevation: elevation,
+                      pressElevation: pressElevation,
+                      materialTapTargetSize: materialTapTargetSize,
+                      labelStyle: labelStyle,
+                      labelPadding: labelPadding,
+                      padding: padding,
+                      visualDensity: visualDensity,
+                      avatarBorder: avatarBorder,
+                    ),
+                ],
+              ),
             ),
           );
         });
@@ -343,6 +347,22 @@ class FormBuilderChoiceChip<T> extends FormBuilderFieldDecoration<T> {
 
 class _FormBuilderChoiceChipState<T>
     extends FormBuilderFieldDecorationState<FormBuilderChoiceChip<T>, T> {
+  void handleFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    effectiveFocusNode.addListener(handleFocusChange);
+  }
+
+  @override
+  void dispose() {
+    effectiveFocusNode.removeListener(handleFocusChange);
+    super.dispose();
+  }
+
   @override
   void didChange(T? value) {
     focus();

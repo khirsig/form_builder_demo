@@ -6,6 +6,7 @@ import 'forms/form_builder_body.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // debugFocusChanges = true;
 
   runApp(const MyApp());
 }

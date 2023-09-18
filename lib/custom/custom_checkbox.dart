@@ -122,6 +122,7 @@ class FormBuilderCheckbox extends FormBuilderFieldDecoration<bool> {
               child: CheckboxListTile(
                 dense: true,
                 isThreeLine: false,
+                focusNode: state.effectiveFocusNode,
                 title: title,
                 subtitle: subtitle,
                 value: tristate ? state.value : (state.value ?? false),
