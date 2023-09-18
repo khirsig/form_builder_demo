@@ -220,6 +220,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                       });
                     },
                   ),
+                  FormBuilderCheckbox(name: "lastField", title: Text("Done")),
                   ButtonBar(
                     children: [
                       ElevatedButton(
@@ -247,6 +248,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                   ),
                   Divider(),
                   ButtonBar(
+                    overflowDirection: VerticalDirection.up,
                     children: [
                       TextButton(
                         onPressed: () {

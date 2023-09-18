@@ -47,6 +47,12 @@ class FormBuilderAutocomplete<T extends Object>
                           fieldState: state,
                         ))
                       : decoration,
+                  onEditingComplete: () {
+                    // prevent default behavior
+                  },
+                  onFieldSubmitted: (value) {
+                    onFieldSubmitted();
+                  },
                 );
               });
         });
@@ -75,8 +81,10 @@ class FormBuilderAutocompleteState<T extends Object>
   @override
   void didChange(T? value) {
     super.didChange(value);
-    _autocompleteController.text =
-        RawAutocomplete.defaultStringForOption(value ?? '');
+    String newTextValue = RawAutocomplete.defaultStringForOption(value ?? '');
+    _autocompleteController.value = TextEditingValue(
+        text: RawAutocomplete.defaultStringForOption(value ?? ''),
+        selection: TextSelection.collapsed(offset: newTextValue.length));
   }
 
   bool isNotEmpty() {
