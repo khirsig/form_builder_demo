@@ -2,8 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart'
-    hide FormBuilderDateTimePicker, FormBuilderTextField, FormBuilderCheckbox;
+    hide
+        FormBuilderDateTimePicker,
+        FormBuilderTextField,
+        FormBuilderCheckbox,
+        FormBuilderChoiceChip;
 import 'package:form_builder_demo/custom/custom_checkbox.dart';
+import 'package:form_builder_demo/custom/custom_choice_chip.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
