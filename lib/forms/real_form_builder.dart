@@ -6,9 +6,11 @@ import 'package:flutter_form_builder/flutter_form_builder.dart'
         FormBuilderDateTimePicker,
         FormBuilderTextField,
         FormBuilderCheckbox,
-        FormBuilderChoiceChip;
+        FormBuilderChoiceChip,
+        FormBuilderDateRangePicker;
 import 'package:form_builder_demo/custom/custom_checkbox.dart';
 import 'package:form_builder_demo/custom/custom_choice_chip.dart';
+import 'package:form_builder_demo/custom/custom_date_range_picker.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
@@ -141,9 +143,19 @@ class RealFormBuilderDemo extends StatelessWidget {
                     validator: FormBuilderValidators.required(),
                   ),
                   FormBuilderDateTimePicker(
-                      name: "birthday",
-                      decoration:
-                          InputDecoration(labelText: "Your date of birth")),
+                    name: "birthday",
+                    decoration:
+                        InputDecoration(labelText: "Your date of birth"),
+                  ),
+                  FormBuilderDateRangePicker(
+                    name: "preferredVacationDate",
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(
+                      const Duration(days: 7),
+                    ),
+                    decoration:
+                        InputDecoration(labelText: "Preferred vacation date"),
+                  ),
                   FormBuilderChoiceChip(
                     name: "userDevice",
                     decoration: InputDecoration(labelText: "Your device"),
@@ -203,7 +215,6 @@ class RealFormBuilderDemo extends StatelessWidget {
                             );
                           }
                         },
-
                         child: Text("Save"),
                       )
                     ],
