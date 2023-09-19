@@ -220,6 +220,32 @@ class RealFormBuilderDemo extends StatelessWidget {
                       });
                     },
                   ),
+                  FormBuilderRangeSlider(
+                    name: "preferedPriceRange",
+                    decoration: InputDecoration(label: Text("Price range")),
+                    min: 0,
+                    max: 100,
+                    divisions: 10,
+                    initialValue: RangeValues(20, 80),
+                  ),
+                  FormBuilderSlider(
+                    name: "budget",
+                    decoration: InputDecoration(label: Text("Budget")),
+                    min: 0,
+                    max: 100,
+                    initialValue: 10,
+                  ),
+                  FormBuilderDropdown<String>(
+                    name: "vacationGoal",
+                    decoration:
+                        InputDecoration(labelText: "Preferred vacation goal"),
+                    items: countries
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            ))
+                        .toList(),
+                  ),
                   FormBuilderCheckbox(name: "lastField", title: Text("Done")),
                   ButtonBar(
                     children: [
