@@ -9,13 +9,15 @@ import 'package:flutter_form_builder/flutter_form_builder.dart'
         FormBuilderCheckbox,
         FormBuilderChoiceChip,
         FormBuilderDateRangePicker,
-        FormBuilderSlider;
+        FormBuilderSlider,
+        FormBuilderRangeSlider;
 import 'package:form_builder_demo/custom/custom_autocomplete.dart';
 import 'package:form_builder_demo/custom/custom_checkbox.dart';
 import 'package:form_builder_demo/custom/custom_choice_chip.dart';
 import 'package:form_builder_demo/custom/custom_date_range_picker.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
 import 'package:form_builder_demo/custom/custom_file_picker.dart';
+import 'package:form_builder_demo/custom/custom_range_slider.dart';
 import 'package:form_builder_demo/custom/custom_slider.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
@@ -153,7 +155,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                   ),
                   FormBuilderCheckbox(
                     name: "terms",
-                    title: Text("Terms accepted"),
+                    title: Text("Accept terms"),
                     validator: FormBuilderValidators.required(),
                   ),
                   FormBuilderDateTimePicker(
@@ -276,7 +278,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                   ),
                   Divider(),
                   ButtonBar(
-                    overflowDirection: VerticalDirection.up,
+                    // overflowDirection: VerticalDirection.up,
                     children: [
                       TextButton(
                         onPressed: () {
@@ -304,6 +306,12 @@ class RealFormBuilderDemo extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
+                          state.fields["preferredVacationDate"]!.focus();
+                        },
+                        child: Text("Focus 'Preferred vacation date'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
                           state.fields["userDevice"]!.focus();
                         },
                         child: Text("Focus 'User device'"),
@@ -313,6 +321,30 @@ class RealFormBuilderDemo extends StatelessWidget {
                           state.fields["country"]!.focus();
                         },
                         child: Text("Focus 'Your country'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["autocomplete"]!.focus();
+                        },
+                        child: Text("Focus 'Autocomplete'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["preferedPriceRange"]!.focus();
+                        },
+                        child: Text("Focus 'Price range'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["budget"]!.focus();
+                        },
+                        child: Text("Focus 'Budget'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          state.fields["vacationGoal"]!.focus();
+                        },
+                        child: Text("Focus 'Preferred vacation goal'"),
                       ),
                     ],
                   )
