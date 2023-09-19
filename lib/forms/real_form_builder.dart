@@ -8,13 +8,15 @@ import 'package:flutter_form_builder/flutter_form_builder.dart'
         FormBuilderTextField,
         FormBuilderCheckbox,
         FormBuilderChoiceChip,
-        FormBuilderDateRangePicker;
+        FormBuilderDateRangePicker,
+        FormBuilderSlider;
 import 'package:form_builder_demo/custom/custom_autocomplete.dart';
 import 'package:form_builder_demo/custom/custom_checkbox.dart';
 import 'package:form_builder_demo/custom/custom_choice_chip.dart';
 import 'package:form_builder_demo/custom/custom_date_range_picker.dart';
 import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
 import 'package:form_builder_demo/custom/custom_file_picker.dart';
+import 'package:form_builder_demo/custom/custom_slider.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
 import 'package:form_builder_demo/data.dart';

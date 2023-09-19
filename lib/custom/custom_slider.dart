@@ -217,59 +217,56 @@ class FormBuilderSlider extends FormBuilderFieldDecoration<double> {
             final effectiveNumberFormat =
                 numberFormat ?? NumberFormat.compact();
 
-            return Focus(
-              child: InputDecorator(
-                decoration: state.decoration,
-                isFocused: state.effectiveFocusNode.hasFocus,
-                child: Container(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Slider(
-                        value: field.value!,
-                        min: min,
-                        max: max,
-                        divisions: divisions,
-                        activeColor: activeColor,
-                        inactiveColor: inactiveColor,
-                        onChangeEnd: onChangeEnd,
-                        onChangeStart: onChangeStart,
-                        label: label,
-                        semanticFormatterCallback: semanticFormatterCallback,
-                        onChanged: state.enabled
-                            ? (value) {
-                                state.focus();
-                                field.didChange(value);
-                              }
-                            : null,
-                        autofocus: autofocus,
-                        mouseCursor: mouseCursor,
-                        focusNode: state.effectiveFocusNode,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          if (displayValues != DisplayValues.none &&
-                              displayValues != DisplayValues.current)
-                            minValueWidget
-                                    ?.call(effectiveNumberFormat.format(min)) ??
-                                Text(effectiveNumberFormat.format(min)),
-                          const Spacer(),
-                          if (displayValues != DisplayValues.none &&
-                              displayValues != DisplayValues.minMax)
-                            valueWidget?.call(effectiveNumberFormat
-                                    .format(field.value)) ??
-                                Text(effectiveNumberFormat.format(field.value)),
-                          const Spacer(),
-                          if (displayValues != DisplayValues.none &&
-                              displayValues != DisplayValues.current)
-                            maxValueWidget
-                                    ?.call(effectiveNumberFormat.format(max)) ??
-                                Text(effectiveNumberFormat.format(max)),
-                        ],
-                      ),
-                    ],
-                  ),
+            return InputDecorator(
+              decoration: state.decoration,
+              isFocused: state.effectiveFocusNode.hasFocus,
+              child: Container(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Slider(
+                      value: field.value!,
+                      min: min,
+                      max: max,
+                      divisions: divisions,
+                      activeColor: activeColor,
+                      inactiveColor: inactiveColor,
+                      onChangeEnd: onChangeEnd,
+                      onChangeStart: onChangeStart,
+                      label: label,
+                      semanticFormatterCallback: semanticFormatterCallback,
+                      onChanged: state.enabled
+                          ? (value) {
+                              field.didChange(value);
+                            }
+                          : null,
+                      autofocus: autofocus,
+                      mouseCursor: mouseCursor,
+                      focusNode: state.effectiveFocusNode,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        if (displayValues != DisplayValues.none &&
+                            displayValues != DisplayValues.current)
+                          minValueWidget
+                                  ?.call(effectiveNumberFormat.format(min)) ??
+                              Text(effectiveNumberFormat.format(min)),
+                        const Spacer(),
+                        if (displayValues != DisplayValues.none &&
+                            displayValues != DisplayValues.minMax)
+                          valueWidget?.call(
+                                  effectiveNumberFormat.format(field.value)) ??
+                              Text(effectiveNumberFormat.format(field.value)),
+                        const Spacer(),
+                        if (displayValues != DisplayValues.none &&
+                            displayValues != DisplayValues.current)
+                          maxValueWidget
+                                  ?.call(effectiveNumberFormat.format(max)) ??
+                              Text(effectiveNumberFormat.format(max)),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             );
@@ -297,11 +294,5 @@ class _FormBuilderSliderState
   void dispose() {
     effectiveFocusNode.removeListener(handleFocusChange);
     super.dispose();
-  }
-
-  @override
-  void focus() {
-    super.focus();
-    print("focus");
   }
 }
