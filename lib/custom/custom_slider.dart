@@ -238,6 +238,7 @@ class FormBuilderSlider extends FormBuilderFieldDecoration<double> {
                       semanticFormatterCallback: semanticFormatterCallback,
                       onChanged: state.enabled
                           ? (value) {
+                              state.focus();
                               field.didChange(value);
                             }
                           : null,
