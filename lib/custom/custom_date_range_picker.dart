@@ -133,53 +133,45 @@ class FormBuilderDateRangePicker
           builder: (FormFieldState<DateTimeRange?> field) {
             final state = field as _FormBuilderDateRangePickerState;
 
-            return FocusTraversalGroup(
-              policy: ReadingOrderTraversalPolicy(),
-              child: InkWell(
-                onTap: state.enabled ? () => state.showPicker() : null,
-                focusNode: state.effectiveFocusNode,
-                autofocus: autofocus,
-                child: TextField(
-                  enabled: state.enabled,
-                  style: style,
-                  focusNode: state._textFieldFocusNode,
-                  onTap: () => state.showPicker(),
-                  decoration: state.isNotEmpty()
-                      ? decoration.copyWith(
-                          suffixIcon: ClearButton<DateTimeRange>(
-                          fieldState: state,
-                        ))
-                      : decoration,
-                  // initialValue: "${_initialValue ?? ''}",
-                  maxLines: maxLines,
-                  keyboardType: keyboardType,
-                  obscureText: obscureText,
-                  onEditingComplete: onEditingComplete,
-                  controller: state._effectiveController,
-                  autocorrect: autocorrect,
-                  autofocus: autofocus,
-                  buildCounter: buildCounter,
-                  cursorColor: cursorColor,
-                  cursorRadius: cursorRadius,
-                  cursorWidth: cursorWidth,
-                  enableInteractiveSelection: enableInteractiveSelection,
-                  maxLength: maxLength,
-                  inputFormatters: inputFormatters,
-                  keyboardAppearance: keyboardAppearance,
-                  maxLengthEnforcement: maxLengthEnforcement,
-                  scrollPadding: scrollPadding,
-                  textAlign: textAlign,
-                  textCapitalization: textCapitalization,
-                  textDirection: textDirection,
-                  textInputAction: textInputAction,
-                  textAlignVertical: textAlignVertical,
-                  strutStyle: strutStyle,
-                  readOnly: true,
-                  expands: expands,
-                  minLines: minLines,
-                  showCursor: showCursor,
-                ),
-              ),
+            return TextField(
+              enabled: state.enabled,
+              style: style,
+              focusNode: state.effectiveFocusNode,
+              onTap: () => state.showPicker(),
+              decoration: state.isNotEmpty()
+                  ? decoration.copyWith(
+                      suffixIcon: ClearButton<DateTimeRange>(
+                      fieldState: state,
+                    ))
+                  : decoration,
+              // initialValue: "${_initialValue ?? ''}",
+              maxLines: maxLines,
+              keyboardType: keyboardType,
+              obscureText: obscureText,
+              onEditingComplete: onEditingComplete,
+              controller: state._effectiveController,
+              autocorrect: autocorrect,
+              autofocus: autofocus,
+              buildCounter: buildCounter,
+              cursorColor: cursorColor,
+              cursorRadius: cursorRadius,
+              cursorWidth: cursorWidth,
+              enableInteractiveSelection: enableInteractiveSelection,
+              maxLength: maxLength,
+              inputFormatters: inputFormatters,
+              keyboardAppearance: keyboardAppearance,
+              maxLengthEnforcement: maxLengthEnforcement,
+              scrollPadding: scrollPadding,
+              textAlign: textAlign,
+              textCapitalization: textCapitalization,
+              textDirection: textDirection,
+              textInputAction: textInputAction,
+              textAlignVertical: textAlignVertical,
+              strutStyle: strutStyle,
+              readOnly: true,
+              expands: expands,
+              minLines: minLines,
+              showCursor: showCursor,
             );
           },
         );
@@ -202,22 +194,26 @@ class _FormBuilderDateRangePickerState extends FormBuilderFieldDecorationState<
     FormBuilderDateRangePicker, DateTimeRange> {
   late TextEditingController _effectiveController;
 
-  final FocusNode _textFieldFocusNode = FocusNode(
-    skipTraversal: true,
-  );
-
   @override
   void initState() {
     super.initState();
     _effectiveController =
         widget.controller ?? TextEditingController(text: _valueToText());
-    // effectiveFocusNode.addListener(_handleFocus);
+
+    effectiveFocusNode.onKeyEvent = (node, event) {
+      if (enabled &&
+          event is KeyDownEvent &&
+          event.logicalKey == LogicalKeyboardKey.space &&
+          node.hasFocus) {
+        showPicker();
+        return KeyEventResult.handled;
+      }
+      return KeyEventResult.ignored;
+    };
   }
 
   @override
   void dispose() {
-    _textFieldFocusNode.dispose();
-    // effectiveFocusNode.removeListener(_handleFocus);
     // Dispose the _effectiveController when initState created it
     if (null == widget.controller) {
       _effectiveController.dispose();
@@ -256,45 +252,6 @@ class _FormBuilderDateRangePickerState extends FormBuilderFieldDecorationState<
       didChange(picked);
     }
   }
-
-  // Future<void> _handleFocus() async {
-  //   if (effectiveFocusNode.hasFocus && enabled) {
-  //     effectiveFocusNode.unfocus();
-  //     /*final initialFirstDate = value?.isEmpty ?? true
-  //         ? (widget.initialFirstDate ?? DateTime.now())
-  //         : value[0];
-  //     final initialLastDate = value?.isEmpty ?? true
-  //         ? (widget.initialLastDate ?? initialFirstDate)
-  //         : (value.length < 2 ? initialFirstDate : value[1]);*/
-  //     final picked = await showDateRangePicker(
-  //       context: context,
-  //       firstDate: widget.firstDate,
-  //       lastDate: widget.lastDate,
-  //       locale: widget.locale,
-  //       textDirection: widget.textDirection,
-  //       cancelText: widget.cancelText,
-  //       confirmText: widget.confirmText,
-  //       currentDate: widget.currentDate,
-  //       errorFormatText: widget.errorFormatText,
-  //       builder: widget.pickerBuilder,
-  //       errorInvalidRangeText: widget.errorInvalidRangeText,
-  //       errorInvalidText: widget.errorInvalidText,
-  //       fieldEndHintText: widget.fieldEndHintText,
-  //       fieldEndLabelText: widget.fieldEndLabelText,
-  //       fieldStartHintText: widget.fieldStartHintText,
-  //       fieldStartLabelText: widget.fieldStartLabelText,
-  //       helpText: widget.helpText,
-  //       initialDateRange: value,
-  //       initialEntryMode: widget.initialEntryMode,
-  //       routeSettings: widget.routeSettings,
-  //       saveText: widget.saveText,
-  //       useRootNavigator: widget.useRootNavigator,
-  //     );
-  //     if (picked != null) {
-  //       didChange(picked);
-  //     }
-  //   }
-  // }
 
   String _valueToText() {
     if (value == null) {
@@ -336,7 +293,7 @@ class _FormBuilderDateRangePickerState extends FormBuilderFieldDecorationState<
               onPressed: () {
                 focus();
                 didChange(null);
-                effectiveFocusNode.unfocus();
+                // effectiveFocusNode.unfocus();
               },
               icon: widget.clearIcon ?? const Icon(Icons.clear)))
       : super.decoration;
