@@ -198,43 +198,46 @@ class FormBuilderDateTimePicker extends FormBuilderFieldDecoration<DateTime> {
           builder: (FormFieldState<DateTime?> field) {
             final state = field as _FormBuilderDateTimePickerState;
 
-            return TextField(
-              focusNode: state.effectiveFocusNode,
-              onTap: () => state.showPicker(),
-              enabled: state.enabled,
-              textDirection: textDirection,
-              textAlign: textAlign,
-              textAlignVertical: textAlignVertical,
-              maxLength: maxLength,
-              decoration: state.isNotEmpty()
-                  ? decoration.copyWith(
-                      suffixIcon: ClearButton<DateTime>(
-                      fieldState: state,
-                    ))
-                  : decoration,
-              readOnly: true,
-              autocorrect: autocorrect,
-              controller: state._textFieldController,
-              inputFormatters: inputFormatters,
-              keyboardType: keyboardType,
-              maxLines: maxLines,
-              obscureText: obscureText,
-              showCursor: showCursor,
-              minLines: minLines,
-              expands: expands,
-              style: style,
-              onEditingComplete: onEditingComplete,
-              buildCounter: buildCounter,
-              cursorColor: cursorColor,
-              cursorRadius: cursorRadius,
-              cursorWidth: cursorWidth,
-              enableInteractiveSelection: enableInteractiveSelection,
-              keyboardAppearance: keyboardAppearance,
-              scrollPadding: scrollPadding,
-              strutStyle: strutStyle,
-              textCapitalization: textCapitalization,
-              textInputAction: textInputAction,
-              maxLengthEnforcement: maxLengthEnforcement,
+            return FocusTraversalGroup(
+              policy: ReadingOrderTraversalPolicy(),
+              child: TextField(
+                focusNode: state.effectiveFocusNode,
+                onTap: () => state.showPicker(),
+                enabled: state.enabled,
+                textDirection: textDirection,
+                textAlign: textAlign,
+                textAlignVertical: textAlignVertical,
+                maxLength: maxLength,
+                decoration: state.isNotEmpty()
+                    ? decoration.copyWith(
+                        suffixIcon: ClearButton<DateTime>(
+                        fieldState: state,
+                      ))
+                    : decoration,
+                readOnly: true,
+                autocorrect: autocorrect,
+                controller: state._textFieldController,
+                inputFormatters: inputFormatters,
+                keyboardType: keyboardType,
+                maxLines: maxLines,
+                obscureText: obscureText,
+                showCursor: showCursor,
+                minLines: minLines,
+                expands: expands,
+                style: style,
+                onEditingComplete: onEditingComplete,
+                buildCounter: buildCounter,
+                cursorColor: cursorColor,
+                cursorRadius: cursorRadius,
+                cursorWidth: cursorWidth,
+                enableInteractiveSelection: enableInteractiveSelection,
+                keyboardAppearance: keyboardAppearance,
+                scrollPadding: scrollPadding,
+                strutStyle: strutStyle,
+                textCapitalization: textCapitalization,
+                textInputAction: textInputAction,
+                maxLengthEnforcement: maxLengthEnforcement,
+              ),
             );
           },
         );

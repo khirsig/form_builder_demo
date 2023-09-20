@@ -133,45 +133,48 @@ class FormBuilderDateRangePicker
           builder: (FormFieldState<DateTimeRange?> field) {
             final state = field as _FormBuilderDateRangePickerState;
 
-            return TextField(
-              enabled: state.enabled,
-              style: style,
-              focusNode: state.effectiveFocusNode,
-              onTap: () => state.showPicker(),
-              decoration: state.isNotEmpty()
-                  ? decoration.copyWith(
-                      suffixIcon: ClearButton<DateTimeRange>(
-                      fieldState: state,
-                    ))
-                  : decoration,
-              // initialValue: "${_initialValue ?? ''}",
-              maxLines: maxLines,
-              keyboardType: keyboardType,
-              obscureText: obscureText,
-              onEditingComplete: onEditingComplete,
-              controller: state._effectiveController,
-              autocorrect: autocorrect,
-              autofocus: autofocus,
-              buildCounter: buildCounter,
-              cursorColor: cursorColor,
-              cursorRadius: cursorRadius,
-              cursorWidth: cursorWidth,
-              enableInteractiveSelection: enableInteractiveSelection,
-              maxLength: maxLength,
-              inputFormatters: inputFormatters,
-              keyboardAppearance: keyboardAppearance,
-              maxLengthEnforcement: maxLengthEnforcement,
-              scrollPadding: scrollPadding,
-              textAlign: textAlign,
-              textCapitalization: textCapitalization,
-              textDirection: textDirection,
-              textInputAction: textInputAction,
-              textAlignVertical: textAlignVertical,
-              strutStyle: strutStyle,
-              readOnly: true,
-              expands: expands,
-              minLines: minLines,
-              showCursor: showCursor,
+            return FocusTraversalGroup(
+              policy: ReadingOrderTraversalPolicy(),
+              child: TextField(
+                enabled: state.enabled,
+                style: style,
+                focusNode: state.effectiveFocusNode,
+                onTap: () => state.showPicker(),
+                decoration: state.isNotEmpty()
+                    ? decoration.copyWith(
+                        suffixIcon: ClearButton<DateTimeRange>(
+                        fieldState: state,
+                      ))
+                    : decoration,
+                // initialValue: "${_initialValue ?? ''}",
+                maxLines: maxLines,
+                keyboardType: keyboardType,
+                obscureText: obscureText,
+                onEditingComplete: onEditingComplete,
+                controller: state._effectiveController,
+                autocorrect: autocorrect,
+                autofocus: autofocus,
+                buildCounter: buildCounter,
+                cursorColor: cursorColor,
+                cursorRadius: cursorRadius,
+                cursorWidth: cursorWidth,
+                enableInteractiveSelection: enableInteractiveSelection,
+                maxLength: maxLength,
+                inputFormatters: inputFormatters,
+                keyboardAppearance: keyboardAppearance,
+                maxLengthEnforcement: maxLengthEnforcement,
+                scrollPadding: scrollPadding,
+                textAlign: textAlign,
+                textCapitalization: textCapitalization,
+                textDirection: textDirection,
+                textInputAction: textInputAction,
+                textAlignVertical: textAlignVertical,
+                strutStyle: strutStyle,
+                readOnly: true,
+                expands: expands,
+                minLines: minLines,
+                showCursor: showCursor,
+              ),
             );
           },
         );
