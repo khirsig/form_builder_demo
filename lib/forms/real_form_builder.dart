@@ -22,6 +22,7 @@ import 'package:form_builder_demo/custom/custom_slider.dart';
 import 'package:form_builder_demo/custom/custom_text_field.dart';
 import 'package:form_builder_demo/custom/custom_typeahead.dart';
 import 'package:form_builder_demo/data.dart';
+import 'package:form_builder_demo/utils/responsive_body.dart';
 // import 'package:form_builder_file_picker/form_builder_file_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
@@ -70,32 +71,6 @@ class MyModel extends InitialValue {
 
   Map<String, dynamic> toMap() {
     return {};
-  }
-}
-
-const double _maxWidth = 800;
-
-class ResponsiveBody extends StatelessWidget {
-  final Widget child;
-  final bool addPadding;
-
-  const ResponsiveBody({Key? key, required this.child, this.addPadding = true})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: addPadding ? EdgeInsets.symmetric(horizontal: 16) : null,
-      child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: _maxWidth,
-            minWidth: 300,
-            maxHeight: double.infinity,
-          ),
-          child: child,
-        ),
-      ),
-    );
   }
 }
 
@@ -155,6 +130,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                   ),
                   FormBuilderCheckbox(
                     name: "terms",
+                    decoration: InputDecoration(labelText: "Accept terms"),
                     title: Text("Accept terms"),
                     validator: FormBuilderValidators.required(),
                   ),
@@ -215,7 +191,7 @@ class RealFormBuilderDemo extends StatelessWidget {
                     decoration: InputDecoration(labelText: "Autocomplete"),
                     optionsBuilder: (TextEditingValue textEditingValue) {
                       if (textEditingValue.text == '') {
-                        return const Iterable<String>.empty();
+                        return countries;
                       }
                       return countries.where((String option) {
                         return option
@@ -276,75 +252,79 @@ class RealFormBuilderDemo extends StatelessWidget {
                       )
                     ],
                   ),
-                  Divider(),
-                  ButtonBar(
-                    // overflowDirection: VerticalDirection.up,
+                  Divider(thickness: 2),
+                  Text(
+                    "Click on a button below to focus any field",
+                  ),
+                  SizedBox(height: 5),
+                  Wrap(
+                    alignment: WrapAlignment.center,
                     children: [
                       TextButton(
                         onPressed: () {
                           state.fields["firstName"]!.focus();
                         },
-                        child: Text("Focus 'First name'"),
+                        child: Text("'First name'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["lastName"]!.focus();
                         },
-                        child: Text("Focus 'Last name'"),
+                        child: Text("'Last name'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["terms"]!.focus();
                         },
-                        child: Text("Focus 'Terms accepted'"),
+                        child: Text("'Terms accepted'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["birthday"]!.focus();
                         },
-                        child: Text("Focus 'Your date of birth'"),
+                        child: Text("'Your date of birth'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["preferredVacationDate"]!.focus();
                         },
-                        child: Text("Focus 'Preferred vacation date'"),
+                        child: Text("'Preferred vacation date'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["userDevice"]!.focus();
                         },
-                        child: Text("Focus 'User device'"),
+                        child: Text("'User device'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["country"]!.focus();
                         },
-                        child: Text("Focus 'Your country'"),
+                        child: Text("'Your country'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["autocomplete"]!.focus();
                         },
-                        child: Text("Focus 'Autocomplete'"),
+                        child: Text("'Autocomplete'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["preferedPriceRange"]!.focus();
                         },
-                        child: Text("Focus 'Price range'"),
+                        child: Text("'Price range'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["budget"]!.focus();
                         },
-                        child: Text("Focus 'Budget'"),
+                        child: Text("'Budget'"),
                       ),
                       TextButton(
                         onPressed: () {
                           state.fields["vacationGoal"]!.focus();
                         },
-                        child: Text("Focus 'Preferred vacation goal'"),
+                        child: Text("'Preferred vacation goal'"),
                       ),
                     ],
                   )
