@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:form_builder_demo/forms/form_body.dart';
-import 'package:form_builder_demo/forms/real_form_builder.dart';
-
-import 'forms/form_builder_body.dart';
+import 'package:form_builder_demo/forms/custom_form_builder_demo.dart';
+import 'package:form_builder_demo/forms/form_builder_demo.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,12 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _getBody() {
     switch (_currentTab) {
-      case 0:
-        return RealFormBuilderDemo();
       case 1:
-        return const FormBuilderBody();
+        return FormBuilderDemo();
       default:
-        return const FormBody();
+        return CustomFormBuilderDemo();
     }
   }
 
@@ -73,15 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.list),
-                label: "RealFormBuilder",
+                label: "Applied Changes",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.list),
-                label: "FormBuilder",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.list),
-                label: "Form",
+                label: "Default Form Builder",
               ),
             ],
           ),

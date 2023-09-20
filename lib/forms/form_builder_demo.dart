@@ -2,28 +2,12 @@
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart'
-    hide
-        FormBuilderDateTimePicker,
-        FormBuilderTextField,
-        FormBuilderCheckbox,
-        FormBuilderChoiceChip,
-        FormBuilderDateRangePicker,
-        FormBuilderSlider,
-        FormBuilderRangeSlider;
-import 'package:form_builder_demo/custom/custom_autocomplete.dart';
-import 'package:form_builder_demo/custom/custom_checkbox.dart';
-import 'package:form_builder_demo/custom/custom_choice_chip.dart';
-import 'package:form_builder_demo/custom/custom_date_range_picker.dart';
-import 'package:form_builder_demo/custom/custom_date_time_picker.dart';
-import 'package:form_builder_demo/custom/custom_file_picker.dart';
-import 'package:form_builder_demo/custom/custom_range_slider.dart';
-import 'package:form_builder_demo/custom/custom_slider.dart';
-import 'package:form_builder_demo/custom/custom_text_field.dart';
-import 'package:form_builder_demo/custom/custom_typeahead.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_demo/data.dart';
 import 'package:form_builder_demo/utils/responsive_body.dart';
-// import 'package:form_builder_file_picker/form_builder_file_picker.dart';
+import 'package:form_builder_demo/utils/responsive_row_column_widget.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
+import 'package:form_builder_file_picker/form_builder_file_picker.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 abstract class InitialValue {
@@ -89,7 +73,7 @@ class RealFormBuilder extends StatelessWidget {
 }
 
 // ignore: use_key_in_widget_constructors
-class RealFormBuilderDemo extends StatelessWidget {
+class FormBuilderDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RealFormBuilder(
@@ -108,49 +92,102 @@ class RealFormBuilderDemo extends StatelessWidget {
             child: ResponsiveBody(
               child: Column(
                 children: [
-                  FormBuilderTextField(
-                    name: "firstName",
-                    decoration: InputDecoration(labelText: "First name"),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.minLength(1)
-                    ]),
-                  ),
-                  FormBuilderTextField(
-                    name: "lastName",
-                    decoration: InputDecoration(labelText: "Last name"),
+                  SizedBox(height: 10),
+                  Text(
+                      "Most widgets can only be consistantly used via mouse clicking. "
+                      "Navigating with tab provides many challenges: Some widgets "
+                      "get opened directly, losing focus after that. Other widgets lose "
+                      "focus after entering a value. Some widgets also never request focus "
+                      "so that open keyboards never get closed."),
+                  SizedBox(height: 15),
+                  ResponsiveRowColumnWidget(
+                    divider: false,
+                    firstWidget: FormBuilderTextField(
+                      name: "firstName",
+                      decoration: InputDecoration(labelText: "First name"),
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                        FormBuilderValidators.minLength(1)
+                      ]),
+                    ),
+                    secondWidget: FormBuilderTextField(
+                      name: "lastName",
+                      decoration: InputDecoration(labelText: "Last name"),
+                    ),
                   ),
                   FormBuilderFilePicker(
                     name: "image",
-                    decoration: InputDecoration(labelText: "Avatar"),
+                    decoration: InputDecoration(
+                      labelText: "User Image",
+                      helperText:
+                          "The image picker is opened either by clicking "
+                          "or if the field is focused by pressing the space key. "
+                          "After an image is chosen, the field keeps the focus for further navigation. "
+                          "However, it does not visually show its focus through the decoration and "
+                          "it is not possible to remove the images via tab and space.",
+                      helperMaxLines: 5,
+                    ),
                     typeSelectors: const [
                       TypeSelector(
-                          type: FileType.image, selector: Icon(Icons.image)),
+                          type: FileType.image,
+                          selector: Row(
+                            children: [
+                              Icon(Icons.image),
+                              Text("Pick an user image")
+                            ],
+                          )),
                     ],
                   ),
                   FormBuilderCheckbox(
                     name: "terms",
-                    decoration: InputDecoration(labelText: "Accept terms"),
+                    decoration: InputDecoration(
+                      labelText: "Accept terms",
+                      helperText:
+                          "The checkbox never gains focus if clicked on."
+                          "Any open keyboard is not closed.",
+                      helperMaxLines: 5,
+                    ),
                     title: Text("Accept terms"),
                     validator: FormBuilderValidators.required(),
                   ),
-                  FormBuilderDateTimePicker(
-                    name: "birthday",
-                    decoration:
-                        InputDecoration(labelText: "Your date of birth"),
-                  ),
-                  FormBuilderDateRangePicker(
-                    name: "preferredVacationDate",
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(
-                      const Duration(days: 7),
+                  ResponsiveRowColumnWidget(
+                    divider: false,
+                    firstWidget: FormBuilderDateTimePicker(
+                      name: "birthday",
+                      decoration: InputDecoration(
+                        labelText: "Your date of birth",
+                        helperText:
+                            "The DatePicker can be opened via click directly but loses "
+                            "its focus after picking a date. It can not be navigated through "
+                            "only to, and then immediatly opens its picker, losing focus after. "
+                            "This makes it impossible to get past it with keyboard.",
+                        helperMaxLines: 7,
+                      ),
                     ),
-                    decoration:
-                        InputDecoration(labelText: "Preferred vacation date"),
+                    secondWidget: FormBuilderDateRangePicker(
+                      name: "preferredVacationDate",
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(
+                        const Duration(days: 7),
+                      ),
+                      decoration: InputDecoration(
+                        labelText: "Preferred vacation date",
+                        helperText:
+                            "The DateRangePicker can be opened via click directly but loses "
+                            "its focus after picking a date. It can not be navigated through "
+                            "only to, and then immediatly opens its picker, losing focus after. "
+                            "This makes it impossible to get past it with keyboard.",
+                        helperMaxLines: 7,
+                      ),
+                    ),
                   ),
                   FormBuilderChoiceChip(
                     name: "userDevice",
-                    decoration: InputDecoration(labelText: "Your device"),
+                    decoration: InputDecoration(
+                      labelText: "Your device",
+                      helperText: "The chips never gain focus if clicked on. "
+                          "Any open keyboard is not closed.",
+                    ),
                     options: const [
                       FormBuilderChipOption(
                           value: "iPhone", avatar: Icon(Icons.apple)),
@@ -162,10 +199,9 @@ class RealFormBuilderDemo extends StatelessWidget {
                   ),
                   FormBuilderTypeAhead<String>(
                     decoration: const InputDecoration(
-                      labelText: 'Your country',
+                      labelText: 'Your country (TypeAhead)',
                     ),
-                    name: 'country',
-                    allowOnlyValuesFromSelectlist: false,
+                    name: 'countryTypeAhead',
                     itemBuilder: (context, country) {
                       return ListTile(title: Text(country));
                     },
@@ -186,39 +222,32 @@ class RealFormBuilderDemo extends StatelessWidget {
                       }
                     },
                   ),
-                  FormBuilderAutocomplete(
-                    name: "autocomplete",
-                    decoration: InputDecoration(labelText: "Autocomplete"),
-                    optionsBuilder: (TextEditingValue textEditingValue) {
-                      if (textEditingValue.text == '') {
-                        return countries;
-                      }
-                      return countries.where((String option) {
-                        return option
-                            .toLowerCase()
-                            .contains(textEditingValue.text.toLowerCase());
-                      });
-                    },
-                  ),
-                  FormBuilderRangeSlider(
-                    name: "preferedPriceRange",
-                    decoration: InputDecoration(label: Text("Price range")),
-                    min: 0,
-                    max: 100,
-                    divisions: 10,
-                    initialValue: RangeValues(20, 80),
-                  ),
-                  FormBuilderSlider(
-                    name: "budget",
-                    decoration: InputDecoration(label: Text("Budget")),
-                    min: 0,
-                    max: 100,
-                    initialValue: 10,
+                  ResponsiveRowColumnWidget(
+                    divider: false,
+                    firstWidget: FormBuilderRangeSlider(
+                      name: "preferedPriceRange",
+                      decoration: InputDecoration(label: Text("Price range")),
+                      min: 0,
+                      max: 100,
+                      initialValue: RangeValues(20, 80),
+                    ),
+                    secondWidget: FormBuilderSlider(
+                      name: "budget",
+                      decoration: InputDecoration(label: Text("Budget")),
+                      min: 0,
+                      max: 100,
+                      initialValue: 10,
+                    ),
                   ),
                   FormBuilderDropdown<String>(
                     name: "vacationGoal",
-                    decoration:
-                        InputDecoration(labelText: "Preferred vacation goal"),
+                    decoration: InputDecoration(
+                      labelText: "Preferred vacation goal",
+                      helperText:
+                          "Open the dropdown and navigate through the options "
+                          "with the arrow keys. Press enter to select an option.",
+                      helperMaxLines: 5,
+                    ),
                     items: countries
                         .map((e) => DropdownMenuItem(
                               value: e,
@@ -226,7 +255,6 @@ class RealFormBuilderDemo extends StatelessWidget {
                             ))
                         .toList(),
                   ),
-                  FormBuilderCheckbox(name: "lastField", title: Text("Done")),
                   ButtonBar(
                     children: [
                       ElevatedButton(
@@ -274,6 +302,12 @@ class RealFormBuilderDemo extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
+                          state.fields["image"]!.focus();
+                        },
+                        child: Text("'User image'"),
+                      ),
+                      TextButton(
+                        onPressed: () {
                           state.fields["terms"]!.focus();
                         },
                         child: Text("'Terms accepted'"),
@@ -298,15 +332,9 @@ class RealFormBuilderDemo extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          state.fields["country"]!.focus();
+                          state.fields["countryTypeAhead"]!.focus();
                         },
-                        child: Text("'Your country'"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          state.fields["autocomplete"]!.focus();
-                        },
-                        child: Text("'Autocomplete'"),
+                        child: Text("'Your Country (TypeAhead)'"),
                       ),
                       TextButton(
                         onPressed: () {

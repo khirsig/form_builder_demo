@@ -79,6 +79,12 @@ class FormBuilderAutocompleteState<T extends Object>
   }
 
   @override
+  void dispose() {
+    _autocompleteController.dispose();
+    super.dispose();
+  }
+
+  @override
   void didChange(T? value) {
     super.didChange(value);
     String newTextValue = RawAutocomplete.defaultStringForOption(value ?? '');

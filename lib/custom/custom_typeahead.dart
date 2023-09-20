@@ -406,8 +406,10 @@ class FormBuilderTypeAheadState<T>
   @override
   void dispose() {
     // Dispose the _typeAheadController when initState created it
+    if (null == widget.controller) {
+      _typeAheadController.dispose();
+    }
     super.dispose();
-    _typeAheadController.dispose();
   }
 
   @override

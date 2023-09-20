@@ -366,6 +366,7 @@ class _FormBuilderChoiceChipState<T>
   @override
   void didChange(T? value) {
     focus();
+    // effectiveFocusNode.requestFocus();
     super.didChange(value);
   }
 }
