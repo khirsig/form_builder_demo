@@ -120,10 +120,13 @@ class FormBuilderFilePicker
                     customTypeViewerBuilder != null
                         ? customTypeViewerBuilder(
                             state.getTypeSelectorActions(typeSelectors, field))
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: state.getTypeSelectorActions(
-                                typeSelectors, field),
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: state.getTypeSelectorActions(
+                                  typeSelectors, field),
+                            ),
                           ),
                     const SizedBox(height: 3),
                     customFileViewerBuilder != null

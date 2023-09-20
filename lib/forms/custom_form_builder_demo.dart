@@ -192,6 +192,7 @@ class CustomFormBuilderDemo extends StatelessWidget {
                   ),
                   FormBuilderChoiceChip(
                     name: "userDevice",
+                    spacing: 4,
                     decoration: InputDecoration(
                       labelText: "Your device",
                       helperText:
@@ -319,7 +320,7 @@ class CustomFormBuilderDemo extends StatelessWidget {
                   ),
                   Divider(thickness: 2),
                   Text(
-                    "Click on a button below to focus any field",
+                    "Click on a button below to focus any field from outside the form",
                   ),
                   SizedBox(height: 5),
                   Wrap(

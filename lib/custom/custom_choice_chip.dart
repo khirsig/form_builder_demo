@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -298,43 +299,47 @@ class FormBuilderChoiceChip<T> extends FormBuilderFieldDecoration<T> {
             child: InputDecorator(
               decoration: state.decoration,
               isFocused: state.effectiveFocusNode.hasFocus,
-              child: Wrap(
-                direction: direction,
-                alignment: alignment,
-                crossAxisAlignment: crossAxisAlignment,
-                runAlignment: runAlignment,
-                runSpacing: runSpacing,
-                spacing: spacing,
-                textDirection: textDirection,
-                verticalDirection: verticalDirection,
-                children: <Widget>[
-                  for (FormBuilderChipOption<T> option in options)
-                    ChoiceChip(
-                      label: option,
-                      shape: shape,
-                      selected: field.value == option.value,
-                      onSelected: state.enabled
-                          ? (selected) {
-                              final choice = selected ? option.value : null;
-                              state.didChange(choice);
-                            }
-                          : null,
-                      avatar: option.avatar,
-                      selectedColor: selectedColor,
-                      disabledColor: disabledColor,
-                      backgroundColor: backgroundColor,
-                      shadowColor: shadowColor,
-                      selectedShadowColor: selectedShadowColor,
-                      elevation: elevation,
-                      pressElevation: pressElevation,
-                      materialTapTargetSize: materialTapTargetSize,
-                      labelStyle: labelStyle,
-                      labelPadding: labelPadding,
-                      padding: padding,
-                      visualDensity: visualDensity,
-                      avatarBorder: avatarBorder,
-                    ),
-                ],
+              child: Padding(
+                padding:
+                    kIsWeb ? const EdgeInsets.only(top: 8.0) : EdgeInsets.zero,
+                child: Wrap(
+                  direction: direction,
+                  alignment: alignment,
+                  crossAxisAlignment: crossAxisAlignment,
+                  runAlignment: runAlignment,
+                  runSpacing: runSpacing,
+                  spacing: spacing,
+                  textDirection: textDirection,
+                  verticalDirection: verticalDirection,
+                  children: <Widget>[
+                    for (FormBuilderChipOption<T> option in options)
+                      ChoiceChip(
+                        label: option,
+                        shape: shape,
+                        selected: field.value == option.value,
+                        onSelected: state.enabled
+                            ? (selected) {
+                                final choice = selected ? option.value : null;
+                                state.didChange(choice);
+                              }
+                            : null,
+                        avatar: option.avatar,
+                        selectedColor: selectedColor,
+                        disabledColor: disabledColor,
+                        backgroundColor: backgroundColor,
+                        shadowColor: shadowColor,
+                        selectedShadowColor: selectedShadowColor,
+                        elevation: elevation,
+                        pressElevation: pressElevation,
+                        materialTapTargetSize: materialTapTargetSize,
+                        labelStyle: labelStyle,
+                        labelPadding: labelPadding,
+                        padding: padding,
+                        visualDensity: visualDensity,
+                        avatarBorder: avatarBorder,
+                      ),
+                  ],
+                ),
               ),
             ),
           );

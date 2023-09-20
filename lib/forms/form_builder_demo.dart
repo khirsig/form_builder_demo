@@ -183,6 +183,7 @@ class FormBuilderDemo extends StatelessWidget {
                   ),
                   FormBuilderChoiceChip(
                     name: "userDevice",
+                    spacing: 4,
                     decoration: InputDecoration(
                       labelText: "Your device",
                       helperText: "The chips never gain focus if clicked on. "
